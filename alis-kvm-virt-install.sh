@@ -14,8 +14,8 @@ set -eu
 # Host and guest shared clipboard
 # Host and guest file sharing
 
-DISK_DIRECTORY="/run/media/picodotdev/Samsung microSD/KVM VMs"
-ISO_DIRECTORY="/run/media/picodotdev/Samsung microSD/Iso"
+DISK_DIRECTORY="/run/media/user/Samsung microSD/KVM VMs"
+ISO_DIRECTORY="/run/media/user/Samsung microSD/Iso"
 
 virt-install \
     --connect=qemu:///session \

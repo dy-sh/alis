@@ -3,7 +3,7 @@ set -eu
 
  # ./alis-cloud-init-ssh.sh -b sid -i 192.168.122.61 -c alis-config-efi-ext4-luks-systemd.sh
 
-GITHUB_USER="picodotdev"
+GITHUB_USER="dy-sh"
 BRANCH="master"
 BRANCH_QUALIFIER=""
 IP_ADDRESS=""
