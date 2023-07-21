@@ -19,7 +19,7 @@ echo "MAC: ${mac_addr} IP: ${ip_address}"
 
 echo "Waiting for server become available..."
 
-ssh-keygen -R "$ip_address" &> /dev/null
+# ssh-keygen -R "$ip_address" &> /dev/null
 while true; do
     if ssh-keyscan -H "$ip_address" &> /dev/null; then
         echo "Server available"
