@@ -14,18 +14,19 @@ set -eu
 # Host and guest shared clipboard
 # Host and guest file sharing
 
-DISK_DIRECTORY="/media/user/E-DATA-B/VM"
-ISO_DIRECTORY="/home/user/Downloads"
+# DISK_DIRECTORY="/media/user/E-DATA-B/VM"
+ISO_DIRECTORY="$HOME/Downloads"
 
 virt-install \
     --connect=qemu:///session \
     --name arch-vm \
     --os-variant archlinux \
-    --vcpu 2 \
+    --vcpus 2 \
     --ram 4096 \
-    --disk path="$DISK_DIRECTORY/archlinux-alis.qcow2,format=qcow2,size=20,sparse=yes" \
+    --disk size="$VM_DISK_SIZE",pool=default,bus=virtio,format=qcow2,sparse=yes \
     --cdrom "$ISO_DIRECTORY/archlinux.iso" \
     --disk cloud-init/alis-cloud-init.iso,device=cdrom,bus=sata \
     --network bridge=virbr0 \
     --noautoconsole
+    # --disk path="$DISK_DIRECTORY/archlinux-alis.qcow2,format=qcow2,size=20,sparse=yes" \
     # --boot uefi \

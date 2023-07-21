@@ -8,7 +8,7 @@ VM_NAME="arch-vm"
 VM_RAM="4096" 
 VM_DISK_SIZE="40" 
 VM_CPUS="4" 
-VM_DISK_DIRECTORY="/media/user/E-DATA-B/VM"
+# VM_DISK_DIRECTORY="/media/user/E-DATA-B/VM"
 ISO_DIRECTORY="$HOME/Downloads"
 
 
@@ -43,7 +43,7 @@ virt-install \
     --vcpus "$VM_CPUS" \
     --virt-type=kvm \
     --ram "$VM_RAM" \
-    --disk path="$VM_DISK_DIRECTORY/archlinux-alis.qcow2,format=qcow2,size="$VM_DISK_SIZE",bus=virtio,sparse=yes" \
+    --disk size="$VM_DISK_SIZE",pool=default,bus=virtio,format=qcow2,sparse=yes \
     --cdrom "$ISO_DIRECTORY/archlinux.iso" \
     --disk cloud-init/alis-cloud-init.iso,device=cdrom,bus=sata \
     --network bridge=virbr0 \
@@ -51,6 +51,7 @@ virt-install \
     --sound ich9 \
     --filesystem source=~/shared,target=shared,accessmode=mapped \
     --noautoconsole
+    # --disk path="$VM_DISK_DIRECTORY/$VM_NAME.qcow2,format=qcow2,size="$VM_DISK_SIZE",bus=virtio,sparse=yes" \
     # --boot uefi \
 
 
