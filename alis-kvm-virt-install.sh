@@ -14,7 +14,7 @@ set -eu
 # Host and guest shared clipboard
 # Host and guest file sharing
 
-DISK_DIRECTORY="/run/media/user/E-DATA-H/VM2"
+DISK_DIRECTORY="/media/user/E-DATA-B/VM"
 ISO_DIRECTORY="/home/user/Downloads"
 
 virt-install \
@@ -23,9 +23,9 @@ virt-install \
     --os-variant archlinux \
     --vcpu 2 \
     --ram 4096 \
-    --boot uefi \
-    --disk path="$DISK_DIRECTORY/archlinux-alis.qcow2,format=qcow2,size=40,sparse=yes" \
+    --disk path="$DISK_DIRECTORY/archlinux-alis.qcow2,format=qcow2,size=20,sparse=yes" \
     --cdrom "$ISO_DIRECTORY/archlinux.iso" \
     --disk cloud-init/alis-cloud-init.iso,device=cdrom,bus=sata \
     --network bridge=virbr0 \
     --noautoconsole
+    # --boot uefi \
