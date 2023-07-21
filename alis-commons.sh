@@ -184,7 +184,7 @@ function facts_commons() {
 function init_log_trace() {
     local ENABLE="$1"
     if [ "$ENABLE" == "true" ]; then
-        set -o xtrace
+        set -x
     fi
 }
 

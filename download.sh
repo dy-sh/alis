@@ -32,7 +32,7 @@ while getopts "b:h:u:" arg; do
   esac
 done
 
-set -o xtrace
+# set -x
 if [ -n "$HASH" ]; then
   curl -sL -o "${ARTIFACT}.zip" "https://github.com/${GITHUB_USER}/alis/archive/${HASH}.zip"
   bsdtar -x -f "${ARTIFACT}.zip"
