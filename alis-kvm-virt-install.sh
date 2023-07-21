@@ -14,18 +14,18 @@ set -eu
 # Host and guest shared clipboard
 # Host and guest file sharing
 
-DISK_DIRECTORY="/run/media/user/Samsung microSD/KVM VMs"
-ISO_DIRECTORY="/run/media/user/Samsung microSD/Iso"
+DISK_DIRECTORY="/run/media/user/E-DATA-H/VM2"
+ISO_DIRECTORY="/home/user/Downloads"
 
 virt-install \
     --connect=qemu:///session \
-    --name archlinux-alis \
+    --name arch-vm \
     --os-variant archlinux \
     --vcpu 2 \
     --ram 4096 \
     --boot uefi \
     --disk path="$DISK_DIRECTORY/archlinux-alis.qcow2,format=qcow2,size=40,sparse=yes" \
-    --cdrom "$ISO_DIRECTORY/archlinux-x86_64.iso" \
+    --cdrom "$ISO_DIRECTORY/archlinux.iso" \
     --disk cloud-init/alis-cloud-init.iso,device=cdrom,bus=sata \
     --network bridge=virbr0 \
     --noautoconsole
