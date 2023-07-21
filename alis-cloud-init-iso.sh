@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -eu
-set -o xtrace
+# set -o xtrace
 
 if [ ! -f cloud-init/alis.key ]; then
     openssl genrsa -out cloud-init/alis.key 8192
