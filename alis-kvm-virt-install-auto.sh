@@ -50,9 +50,9 @@ virt-install \
     --graphics spice,listen=127.0.0.1 \
     --sound ich9 \
     --filesystem source=~/shared,target=shared,accessmode=mapped \
+    --boot uefi \
     --noautoconsole
     # --disk path="$VM_DISK_DIRECTORY/$VM_NAME.qcow2,format=qcow2,size="$VM_DISK_SIZE",bus=virtio,sparse=yes" \
-    # --boot uefi \
 
 
 echo "Wait for starting VM..."
