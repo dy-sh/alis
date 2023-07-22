@@ -87,7 +87,7 @@ done
 
 echo "Connecting..."
 
-./alis-cloud-init-ssh.sh -i $ip_address -c ""
+./alis-cloud-init-ssh.sh -i $ip_address
 # ./alis-cloud-init-ssh.sh -i $ip_address -c alis-config-efi-ext4-grub-gnome-qemu.sh
 
 
