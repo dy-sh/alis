@@ -55,6 +55,8 @@ virt-install \
     # --boot uefi \
 
 
+sudo pacman -S --needed --noconfirm net-tools
+
 echo "Wait for starting VM..."
 
 while true; do
@@ -72,7 +74,8 @@ echo "MAC: ${mac_addr} IP: ${ip_address}"
 
 echo "Waiting for server become available..."
 
-touch /home/user/.ssh/known_hosts
+mkdir -p ~/.ssh
+touch ~/.ssh/known_hosts
 
 # ssh-keygen -R "$ip_address" &> /dev/null
 while true; do
