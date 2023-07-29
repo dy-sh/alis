@@ -30,6 +30,44 @@ if [[ ! -f cloud-init/alis-cloud-init.iso ]]; then
 fi
 
 
+# Check if bridge exist
+echo "Checking if the bridge exist..."
+sudo pacman -S --needed --noconfirm dnsmasq
+if [ $(sudo virsh net-list --all | grep -c "default") -eq 0 ]; then
+  echo "Network 'default' does not exist. Creating..."
+    cat <<EOF > default.xml
+<network>
+  <name>default</name>
+  <bridge name="virbr0" />
+  <forward mode="nat" />
+  <ip address="192.168.122.1" netmask="255.255.255.0">
+    <dhcp>
+      <range start="192.168.122.2" end="192.168.122.254" />
+    </dhcp>
+  </ip>
+</network>
+EOF
+
+    sudo virsh net-define default.xml
+    sudo virsh net-start default
+    sudo virsh net-autostart default
+  
+  echo "Network 'default' created."
+else
+  echo "Network 'default' exist."
+fi
+
+# Check if bridge exist
+echo "Checking the bridge started..."
+if [[ $(sudo virsh net-info default | grep "Active:" | awk '{print $2}') == "no" ]]; then
+  sudo virsh net-start default
+  sudo virsh net-autostart default
+  echo "Network 'default' started."
+fi
+
+
+
+
 # Creating QEMU VM
 echo "Creating VM..."
 
@@ -55,7 +93,11 @@ virt-install \
     # --boot uefi \
 
 
-sudo pacman -S --needed --noconfirm net-tools
+if ! command -v arp &> /dev/null
+then
+    echo "Installing net-tools"
+    sudo pacman -S --needed --noconfirm net-tools
+fi
 
 echo "Wait for starting VM..."
 
