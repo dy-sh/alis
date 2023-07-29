@@ -45,4 +45,5 @@ fi
 chmod +x configs/*.sh
 chmod +x ./*.sh
 
+cd alis-master
 ./alis-kvm-virt-install-auto.sh
