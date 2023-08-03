@@ -430,12 +430,16 @@ function partition_options() {
             PARTITION_OPTIONS="$PARTITION_OPTIONS,nodiscard"
         fi
     fi
+
+    if [ "$DEVICE_COMPRESSION" == "true" ]; then
+        PARTITION_OPTIONS="$PARTITION_OPTIONS,compress=zstd"
+    fi
 }
 
 function partition_mount() {
     if [ "$FILE_SYSTEM_TYPE" == "btrfs" ]; then
         # mount subvolumes
-        mount -o "subvol=${BTRFS_SUBVOLUME_ROOT[1]},$PARTITION_OPTIONS,compress=zstd" "$DEVICE_ROOT" "${MNT_DIR}"
+        mount -o "subvol=${BTRFS_SUBVOLUME_ROOT[1]},$PARTITION_OPTIONS" "$DEVICE_ROOT" "${MNT_DIR}"
         mkdir -p "${MNT_DIR}"/boot
         mount -o "$PARTITION_OPTIONS_BOOT" "$PARTITION_BOOT" "${MNT_DIR}"/boot
         for I in "${BTRFS_SUBVOLUMES_MOUNTPOINTS[@]}"; do
@@ -452,7 +456,7 @@ function partition_mount() {
             else
                 mkdir -p "${MNT_DIR}${SUBVOLUME[2]}"
             fi
-            mount -o "subvol=${SUBVOLUME[1]},$PARTITION_OPTIONS,compress=zstd" "$DEVICE_ROOT" "${MNT_DIR}${SUBVOLUME[2]}"
+            mount -o "subvol=${SUBVOLUME[1]},$PARTITION_OPTIONS" "$DEVICE_ROOT" "${MNT_DIR}${SUBVOLUME[2]}"
         done
     else
         # root

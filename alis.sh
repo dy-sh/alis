@@ -160,6 +160,7 @@ function check_variables() {
     check_variables_list "PARTITION_MODE" "$PARTITION_MODE" "auto custom manual" "true" "true"
     check_variables_value "PARTITION_BOOT_NUMBER" "$PARTITION_BOOT_NUMBER"
     check_variables_value "PARTITION_ROOT_NUMBER" "$PARTITION_ROOT_NUMBER"
+    check_variables_boolean "DEVICE_COMPRESSION" "$DEVICE_COMPRESSION"
     check_variables_boolean "GPT_AUTOMOUNT" "$GPT_AUTOMOUNT"
     if [ "$GPT_AUTOMOUNT" == "true" ] && [ "$LVM" == "true" ]; then
         echo "LVM not possible in combination with GPT partition automounting."
